@@ -25,12 +25,12 @@ do
     echo "--- test case $i ---"
     case $2 in
     "py")
-        cat $DIR/input/${input_files[i]} | python -m memory_profiler $DIR/$PROGRAM >> $DIR/tmp.txt
+        cat $DIR/input/${input_files[i]} | python -m memory_profiler $DIR/$PROGRAM > $DIR/tmp.txt
         ;;
     "cpp")
         PROGRAM='program.cpp'
         clang++ -std=c++11 $DIR/$PROGRAM -o $DIR/out
-        cat $DIR/input/${input_files[i]} | $DIR/out >> $DIR/tmp.txt 2>&1
+        cat $DIR/input/${input_files[i]} | $DIR/out > $DIR/tmp.txt 2>&1
         ;;
     *)
         cat $DIR/input/${input_files[i]} | python -m memory_profiler $DIR/$PROGRAM >> $DIR/tmp.txt

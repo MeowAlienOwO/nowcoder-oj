@@ -49,15 +49,16 @@ int main()
 
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
+    // 最短编辑距离
     for (int i = 1; i <= m; i++)
     {
         for (int j = 1; j <= n; j++)
         {
-            if (str1[i] == str2[j])
+            if (str1[i] == str2[j]) // 相等时进行对角移动
             {
                 dp[i][j] = dp[i - 1][j - 1] + 1;
             }
-            else
+            else // 否则进行曼哈顿移动
             {
                 dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
             }
@@ -71,6 +72,9 @@ int main()
     int j = n - 1;
     int k = length - 1;
 
+    // 从最短编辑距离反推公共子序列
+    // 从右下开始，如果上或者左与当前格相等，说明这一步增删了，曼哈顿移动
+    // 如果上左相等，说明这一步对角移动，当前元素放入子序列
     while (k >= 0)
     {
         if (i >= 1 && dp[i - 1][j] == dp[i][j])
