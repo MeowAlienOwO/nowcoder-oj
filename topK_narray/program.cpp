@@ -59,7 +59,7 @@ int main()
 {
 
     int t, k;
-    scanf("%d%d", &t, &k);
+    scanf("%d%d\n", &t, &k);
     vector<vector<int>> arr2d;
     for (int i = 0; i < t; i++)
     {
@@ -75,16 +75,27 @@ int main()
         arr2d.push_back(arr);
     }
 
-    // vector<HeapNode> heap;
+    // for (int i = 0; i < t; i++)
+    // {
+    //     for (int j = 0; j < arr2d[i].size(); j++)
+    //     {
+    //         cout << arr2d[i][j] << " ";
+    //     }
 
-    priority_queue<HeapNode> queue;
+    //     cout << endl;
+    // }
+
+    priority_queue<HeapNode, vector<HeapNode>> queue;
     for (int i = 0; i < t; i++)
     {
-        HeapNode node;
-        node.val = arr2d[i].back();
-        node.row = i;
-        node.col = arr2d[i].size() - 1;
-        queue.push(node);
+        if (!arr2d[i].empty())
+        {
+            HeapNode node;
+            node.val = arr2d[i].back();
+            node.row = i;
+            node.col = arr2d[i].size() - 1;
+            queue.push(node);
+        }
     }
 
     for (int i = 0; i < k; i++)
